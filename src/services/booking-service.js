@@ -27,7 +27,10 @@ class BookingService {
       await axios.put(updateFlightRequestURL, {
         totalSeats: flightData.totalSeats - booking.noOfSeats,
       });
-      return booking;
+      const finalBooking = await this.bookingRepository.update(booking.id, {
+        status: "Booked",
+      });
+      return finalBooking;
     } catch (error) {
       console.log(error);
       if (error.name == "RepositoryError" || error.name == "ValidationError") {
