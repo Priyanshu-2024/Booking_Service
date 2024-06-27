@@ -1,4 +1,4 @@
-const { StatusCode, StatusCodes } = require("http-status-codes");
+const { StatusCodes } = require("http-status-codes");
 const { Booking } = require("../models/index");
 const { ValidationError, AppError } = require("../utils/errors/index");
 
@@ -15,6 +15,24 @@ class BookingRepository {
         "RepositoryError",
         "Cannot Create Booking",
         "There was some issue creating the booking, please try again later",
+        StatusCodes.INTERNAL_SERVER_ERROR
+      );
+    }
+  }
+
+  async update(bookingId, data) {
+    try {
+      await Booking.update(data, {
+        where: {
+          id: bookingId,
+        },
+      });
+      return true;
+    } catch (error) {
+      throw new AppError(
+        "RepositoryError",
+        "Cannot Update Booking",
+        "There Was some some issue updating the booking, please try again later",
         StatusCodes.INTERNAL_SERVER_ERROR
       );
     }

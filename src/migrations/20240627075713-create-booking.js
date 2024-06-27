@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      flightid: {
+      flightId: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
@@ -19,7 +19,6 @@ module.exports = {
       },
       status: {
         type: Sequelize.ENUM,
-        allowNull: false,
         values: ["InProcess", "Booked", "Cancelled"],
         defaultValue: "InProcess",
       },
